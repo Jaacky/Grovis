@@ -1,0 +1,1 @@
+Visi = new Mongo.Collection("visi");
