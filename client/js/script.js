@@ -87,7 +87,21 @@ if (Meteor.isClient) {
 		"click .delete": function(event) {
 			console.log(this);
 			var found = Visi.findOne(this.id);
-			console.log(found);
+			console.log(found.series);
+			series = found.series;
+			console.log(series);
+			for (var i=0; i<series.length; i++) {
+				//console.log("Series.key: " + series[i].key);
+				//console.log("this.key: " + this.key);
+				if (series[i].key === this.key) {
+					console.log("found!");
+					series.splice(i, 1);
+					break;
+				}
+			}
+			Visi.update(this.id, {
+				$set: { series: series }
+			});
 		},
 	});
 }
