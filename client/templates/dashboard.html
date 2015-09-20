@@ -31,16 +31,17 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
+                  <th>Title</th>
+                  <th>Created on</th>
+                  <th>Whole number</th>
+                  <th>userID</th>
+                  <th>_id</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 {{#each visi}}
-                  {{> vis}}
+                  {{> visRow}}
                 {{/each}}
               </tbody>
             </table>
@@ -48,12 +49,13 @@
         </div>
 </template>
 
-<template name="vis">
-  <tr>
+<template name="visRow">
+  <tr class="visRow">
     <td>{{title}}</td>
     <td>{{createdAt}}</td>
-    <td>blah</td>
-    <td>blah</td>
-    <td>blah</td>
+    <td>{{wholeNumber}}</td>
+    <td>{{userID}}</td>
+    <td>{{this._id}}</td>
+    <td><button class="delete">&times;</button></td>
   </tr>
 </template>

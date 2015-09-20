@@ -1,0 +1,126 @@
+<template name="entry">
+	<tr class="visRow">
+    <td>Key: {{key}}</td>
+    <td>Value: {{value}}</td>
+    <td>{{id}}</td>
+    <td>blah</td>
+    <td>{{this._id}}</td>
+    <td><button class="delete">&times;</button></td>
+  </tr>
+</template>
+
+<template name="vis">
+
+	<!-- <div class="chart">
+	</div> -->
+	<h1>{{title}}</h1>
+	<h2>{{_id}}</h2>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-5">
+				<div id="chart_container">
+					<div id="y_axis"></div>
+					<div id="chart"></div>
+					<div id="x_axis"></div>
+				</div>
+			</div>
+			<div class="col-lg-5">
+				<form class="vis-updater">
+					<div class="form-group">
+						<span class="label label-default col-lg-2">When</span>
+						<div class="col-lg-10"><input type="text" name="when" placeholder="Date" /></div>
+					</div>
+
+					<div class="form-group">
+						<span class="label label-default col-lg-2">Value</span>
+						<div class="col-lg-10"><input type="text" name="value" placeholder="value" /></div>
+					</div>
+					<input type="hidden" name="id" value="{{_id}}"/>
+					<button id="vis-update">Add value</button>
+				</form>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th>Title</th>
+			      <th>Created on</th>
+			      <th>Whole number</th>
+			      <th>userID</th>
+			      <th>_id</th>
+			      <th></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    {{#each series}}
+			      {{> entry }}
+			    {{/each}}
+			  </tbody>
+			</table>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		//console.log(moment().dayOfYear());
+		//console.log(moment());
+		var graph = new Rickshaw.Graph( {
+			element: document.getElementById("chart"),
+			renderer: 'line',
+			height: 300,
+			series: [
+				/*{
+					data: [ { x: 0, y: 120 }, { x: 1, y: 890 }, { x: 1.5, y: 200 }, { x: 2, y: 38 }, { x: 3, y: 70 }, { x: 4, y: 32 } ],
+					color: "#c05020"
+				}, {
+					data: [ { x: 0, y: 80 }, { x: 1, y: 200 }, { x: 2, y: 100 }, { x: 3, y: 520 }, { x: 4, y: 133 } ],
+					color: "#30c020"
+				}, {
+					data: [ { x: 0, y: 200 }, { x: 1, y: 390 }, { x: 2, y: 1000 }, { x: 3, y: 200 }, { x: 4, y: 230 } ],
+					color: "#6060c0"
+				}*/
+				{
+					data: [{x:0, y:500}, {x:1, y:500}, {x:2, y:500},{x:3, y:500},{x:4, y:500}, {x:5, y:500}, {x:6, y:500}]
+				}
+			]
+		});
+
+
+		var format = function(n) {
+
+			var map = {
+				0: 'Sunday',
+				1: 'Monday',
+				2: 'Tuesday',
+				3: 'Wednesday',
+				4: 'Thursday',
+				5: 'Friday',
+				6: 'Saturday',
+			};
+
+			return map[n];
+		}
+
+		var x_ticks = new Rickshaw.Graph.Axis.X( {
+			graph: graph,
+			orientation: 'bottom',
+			element: document.getElementById('x_axis'),
+			pixelsPerTick: 50,
+			tickFormat: format
+		} );
+
+
+		var y_ticks = new Rickshaw.Graph.Axis.Y( {
+			graph: graph,
+			orientation: 'left',
+			//tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+			tickFormat: function(y){return y.toPrecision(5)},
+			element: document.getElementById('y_axis')
+		} );
+
+
+
+		graph.render();
+
+	</script>
+</template>

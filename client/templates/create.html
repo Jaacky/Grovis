@@ -1,6 +1,14 @@
 <template name="visCreate">
 	<form class="new-vis">
-		<input type="text" name="title" placeholder="Vis name" />
+		<div class="form-group">
+			<span class="label label-default col-lg-2">Title</span>
+			<div class="col-lg-10"><input type="text" name="title" placeholder="Vis name" /></div>
+		</div>
+		<!-- <div class="form-group">
+			<span class="label label-default col-lg-2">Whole Number Values</span>
+			<div class="col-lg-10"><input type="checkbox" name="wholeNumber" aria-label="whole_number" value="true" /></div>
+		</div> -->
+		<input type="hidden" value="{{facebookID}}"/>
 		<button id="vis_create" type="submit">Create Vis</button>
 	</form>
 </template>

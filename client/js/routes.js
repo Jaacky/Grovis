@@ -28,8 +28,14 @@ Router.route('/dashboard', function () {
  	this.render('dashboard');
 });
 
-Router.route('/graph', function () {
- 	this.render('graph');
+Router.route('/vis/:_id', function () {
+	var id = this.params._id;
+	console.log(Visi.findOne({_id: id}));
+ 	this.render('vis', {
+ 		data: function() {
+ 			return Visi.findOne({_id: id});
+ 		},
+ 	});
 });
 
 Router.route('/visCreate', function() {
